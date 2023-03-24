@@ -2,6 +2,7 @@
 #include <random>
 #include <algorithm>
 #include <iostream>
+#include <unordered_set>
 
 namespace Devialify
 {
@@ -49,9 +50,13 @@ void Playlist::clear()
 
 void Playlist::removeDuplicates()
 {
-    std::sort(m_tracks.begin(), m_tracks.end(), [](const Track& l, const Track& r) { return l.id() < r.id(); });
-    const auto last = std::unique(m_tracks.begin(), m_tracks.end(), std::equal_to<Track>());
-    m_tracks.erase(last, m_tracks.end());
+    // This approach is used to not mess the order of the playlist
+    // If order is not important, we can std::sort the playlist and then use std::unique
+    std::unordered_set<Track, TrackHash> seen;
+    auto end = std::remove_if(m_tracks.begin(), m_tracks.end(), [&](Track& track) {
+        return !seen.insert(track).second;
+    });
+    m_tracks.erase(end, m_tracks.end());
 }
 
 void Playlist::showInfo() const {

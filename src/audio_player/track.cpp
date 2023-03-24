@@ -16,27 +16,14 @@ Track::Track(const std::string &title, const std::string &artist, const int dura
     : m_title(tolower(title))
     , m_artist(tolower(artist))
     , m_duration(duration)
-    , m_codec(codec)
+    , m_codec(tolower(codec))
 {
 }
 
-Track::Track(const Track &other) 
-    : m_title(other.m_title)
-    , m_artist(other.m_artist)
-    , m_duration(other.m_duration)
-    , m_codec(other.m_codec)
+bool operator==(const Track &l, const Track &r)
 {
+    return l.id() == r.id();
 }
-
-Track& Track::operator=(Track&& other)
-{
-    m_title = std::move(other.m_title);
-    m_artist = std::move(other.m_artist);
-    m_duration = std::move(other.m_duration);
-    m_codec = std::move(other.m_codec);
-    return *this;
-}
-
 
 const std::string &Track::title() const
 {
