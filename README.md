@@ -11,7 +11,8 @@ I beleive the code is self explanatory, the only meaningful note is that the Med
 
 ## Running The App
 
-The app is a CMAKE project. That's the only pre-requisite needed to build/run the app. Assuming CMake is installed and exists in your PATH. Please run 
+The app is a CMAKE project. That's the only pre-requisite needed to build/run the app. Assuming CMake is installed and exists in your PATH. Please run: 
+
 ```python
 python3 ./run.py
 ```
