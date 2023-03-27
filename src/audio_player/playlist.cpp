@@ -98,4 +98,15 @@ void Playlist::shuffle()
     std::shuffle(m_tracks.begin(), m_tracks.end(), std::random_device());
 }
 
+std::vector<Track> Playlist::find(const std::string& titleFilter) const
+{
+    std::vector<Track> matchingTracks{};
+    for (const auto& track : m_tracks) {
+        if (track.title().find(titleFilter) != std::string::npos) {
+            matchingTracks.push_back(track);
+        }
+    }
+    return matchingTracks;
+}
+
 }

@@ -6,7 +6,7 @@ int main() {
     while (true) 
     {
         std::cout << std::endl;
-        std::cout << "Enter command (p: play, s: pause, r: resume, n: skip, b: back, sh: shuffle, rp: repeat, a: add track, rt: remove track, rd: remove duplicates, ti: show track info, pi: show playlist info, ap: add playlist, rmp: remove playlist, sp: select playlist, pai: show all playlists info, rn: rename playlist, q: quit): ";
+        std::cout << "Enter command (p: play, s: pause, r: resume, n: skip, b: back, sh: shuffle, rp: repeat, a: add track, rt: remove track, rd: remove duplicates, ti: show track info, pi: show playlist info, ap: add playlist, rmp: remove playlist, sp: select playlist, pai: show all playlists info, rn: rename playlist, ft: find track, q: quit): ";
         std::string command;
         getline(std::cin, command);
         
@@ -46,6 +46,8 @@ int main() {
             player.showPlaylists();
         } else if (command == "rn") {
             player.renamePlaylist();
+        } else if (command == "ft") {
+            player.find();
         }
         else if (command == "q") {
             break;

@@ -20,6 +20,7 @@ class Playlist final
         void removeDuplicates();
         void showInfo() const;
         void shuffle();
+        std::vector<Track> find(const std::string& titleFilter) const;
         
         void clear();
         size_t size() const;

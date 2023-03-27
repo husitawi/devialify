@@ -17,9 +17,9 @@ MediaPlayer::MediaPlayer(const std::string &defaultPlaylist)
 
 void MediaPlayer::play()
 {
+    auto& playlist = m_playlists[m_currentPlaylistIndex];
     if (!m_isPlaying && !m_isPaused)
     {
-        auto& playlist = m_playlists[m_currentPlaylistIndex];
         if (playlist.isEmpty())
         {
             std::cout << "Playlist is empty." << std::endl;
@@ -36,7 +36,7 @@ void MediaPlayer::play()
     }
     else
     {
-        std::cout << "Already playing." << std::endl;
+        std::cout << "Already playing: " << playlist[m_currentTrackIndex].title() << std::endl;
     }
 }
 
@@ -359,6 +359,39 @@ void MediaPlayer::renamePlaylist()
     getline(std::cin, name);
     m_playlists[index - 1].rename(name);
     std::cout << "Playlist renamed." << std::endl;
+}
+
+void MediaPlayer::find() const
+{
+    std::string titleFilter;
+    std::cout << "Enter title filter: ";
+    getline(std::cin, titleFilter);
+
+    if(titleFilter.empty())
+    {
+        std::cout << "Title filter cannot be empty." << std::endl;
+        return;
+    }
+
+    auto& playlist = m_playlists[m_currentPlaylistIndex];
+    if (playlist.isEmpty())
+    {
+        std::cout << "Playlist is empty." << std::endl;
+        return;
+    }
+
+    auto tracks = playlist.find(titleFilter);
+    if (tracks.empty())
+    {
+        std::cout << "No tracks found." << std::endl;
+        return;
+    }
+
+    std::cout << "Tracks found:" << std::endl;
+    for (int index = 0; index < tracks.size(); ++index)
+    {
+        std::cout << index + 1 << ". " << tracks[index].toString() << std::endl;
+    }
 }
 
 }

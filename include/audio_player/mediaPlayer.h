@@ -24,6 +24,7 @@ public:
     void showPlaylistInfo() const;
     void showPlaylists() const;
     void renamePlaylist();
+    void find() const;
     
     static MediaPlayer& instance(const std::string& defaultPlaylist = "Default");
 
